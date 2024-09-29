@@ -35,8 +35,11 @@ def get_access_token():
             "grant_type": "client_credentials",
         }
         response = requests.post(TOKEN_URL, headers=headers, data=data)
-        response_data = response.json()
 
+        if response.status_code != 200:
+            return None
+
+        response_data = response.json()
         access_token = response_data.get('access_token')
         expires_in = 30*60      # 30분을 초 단위로 변환
 
@@ -49,8 +52,14 @@ def get_access_token():
 # playlist 조회
 class PlaylistDataAPIView(APIView):
     def get(self, request):
-        access_token = get_access_token()
+        # 캐시 확인
+        cache_key = 'playlist_data'
+        cache_data = cache.get(cache_key)
 
+        if cache_data:
+            return Response(cache_data, status=200)
+
+        access_token = get_access_token()
         if not access_token:
             return Response({"error": "토큰이 유효하지 않습니다."}, status=400)
 
@@ -65,7 +74,7 @@ class PlaylistDataAPIView(APIView):
         
         playlists = []
         for item in spotify_data.get("playlists", {}).get("items", []):
-            playlist = {
+            playlist_data = {
                 "name": item["name"],  # 플레이리스트 이름
                 "link": item["external_urls"]["spotify"],  # 플레이리스트 링크
                 "image_url": (
@@ -73,7 +82,22 @@ class PlaylistDataAPIView(APIView):
                 ),  # 플레이리스트 이미지 URL (있는 경우)
                 "id": item["id"],
             }
-            playlists.append(playlist)
+
+            # DB에 플레이리스트 데이터 저장
+            Playlist.objects.get_or_create(
+                user=request.user,
+                playlist_id=playlist_data['id'],
+                defaults={
+                    "name": playlist_data['name'],
+                    "link": playlist_data['link'],
+                    "image_url": playlist_data['image_url']
+                }
+            )
+
+            playlists.append(playlist_data)
+
+        # 캐시에 저장
+        cache.set(cache_key, playlists, timeout=1*60)
         return Response(playlists, status=200)
 
 # playlist 검색
@@ -81,6 +105,22 @@ class PlaylistSearchAPIView(APIView):
     def get(self, request):
         search = request.query_params.get("query", None)
 
+        # 캐시에서 데이터 확인
+        cache_key = f'playlist_search_{search}'     # 검색어마다 고유한 캐시 생성
+        cache_playlist = cache.get(cache_key)
+
+        if cache_playlist:
+            return Response(cache_playlist, status=200)
+        
+        # 로컬 DB에서 동일한 검색어로 저장된 플레이리스트 확인
+        # __icontains : 특정 문자가 포함된 것을 찾을 때 사용 (대소문자를 구분하지 않음)
+        playlist_in_db = Playlist.objects.filter(name__icontains=search)
+        if playlist_in_db.exists():
+            serializer = PlaylistSerializer(playlist_in_db, many=True)
+            cache.set(cache_key, serializer.data, timeout=1*60)    # 캐시 시간 30분
+            return Response(serializer.data, status=200)
+
+        # 캐시와 DB에 없으면 Spotify API 호출
         access_token = get_access_token()
         if not access_token:
             return Response({"error": "토큰이 유효하지 않습니다."}, status=400)
@@ -98,7 +138,7 @@ class PlaylistSearchAPIView(APIView):
 
         playlists = []
         for item in spotify_data.get("playlists", {}).get("items", []):
-            playlist = {
+            playlist_data = {
                 "name": item["name"],  # 플레이리스트 이름
                 "link": item["external_urls"]["spotify"],  # 플레이리스트 링크
                 "image_url": (
@@ -106,12 +146,78 @@ class PlaylistSearchAPIView(APIView):
                 ),  # 플레이리스트 이미지 URL (있는 경우)
                 "id": item["id"],
             }
+
+            # 로컬 DB에 저장
+            Playlist.objects.get_or_create(
+                user=request.user,
+                playlist_id=playlist_data['id'],
+                defaults={
+                    "name": playlist_data['name'],
+                    "link": playlist_data['link'],
+                    "image_url": playlist_data['image_url']
+                }
+            )
+
             # 리스트에 플레이리스트 추가
-            playlists.append(playlist)
+            playlists.append(playlist_data)
+
+        # 캐시에 저장
+        cache.set(cache_key, playlists, timeout=1*60)
         return Response(playlists, status=200)
 
-class PlaylistZzimAPIView(APIView):
 
+# Spotify API 데이터 변경 시 DB, 캐시 업데이트
+class PlaylistUpdateAPIView(APIView):
+    def get(self, request):
+        search = request.query_params.get('query', None)
+
+        # 캐시 확인
+        cache_key = f'playlist_search_{search}'
+        cache_playlist = cache.get(cache_key)
+
+        if cache_playlist:
+            return Response(cache_playlist, status=200)
+        
+        access_token = get_access_token()
+        if not access_token:
+                return Response({'error' : '토큰이 유효하지 않습니다.'}, status=400)
+
+        headers = {"Authorization": f"Bearer {access_token}"}
+        params = {"q": search, "type": "playlist"}
+
+        spotify_api = requests.get(
+            "https://api.spotify.com/v1/search?limit=40", headers=headers, params=params
+        )
+        spotify_data = spotify_api.json()
+
+        playlists = []
+        for item in spotify_data.get("playlists", {}).get("items", []):
+            # API에서 가져온 데이터를 DB에서 업데이트
+            playlist, created = Playlist.objects.update_or_create(
+                playlist_id=item["id"],
+                defaults={
+                    "name": item["name"],
+                    "link": item["external_urls"]["spotify"],
+                    "image_url": item["images"][0]["url"] if item["images"] else None
+                }
+            )
+
+            playlist_data = {
+                "name": playlist.name,
+                "link": playlist.link,
+                "image_url": playlist.image_url,
+                "id": playlist.playlist_id,
+            }
+
+            playlists.append(playlist_data)
+
+        # 캐시에 저장
+        cache.set(cache_key, playlists, timeout=1*60)
+
+        return Response(playlists, status=200)
+
+
+class PlaylistZzimAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, playlist_id):
