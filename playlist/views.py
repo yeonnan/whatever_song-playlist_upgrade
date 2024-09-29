@@ -84,16 +84,16 @@ class PlaylistDataAPIView(APIView):
             }
 
             # DB에 플레이리스트 데이터 저장
-            Playlist.objects.get_or_create(
-                user=request.user,
-                playlist_id=playlist_data['id'],
-                defaults={
-                    "name": playlist_data['name'],
-                    "link": playlist_data['link'],
-                    "image_url": playlist_data['image_url']
-                }
-            )
-
+            if request.user.is_authenticated:
+                Playlist.objects.get_or_create(
+                    user=request.user,
+                    playlist_id=playlist_data['id'],
+                    defaults={
+                        "name": playlist_data['name'],
+                        "link": playlist_data['link'],
+                        "image_url": playlist_data['image_url']
+                    }
+                )
             playlists.append(playlist_data)
 
         # 캐시에 저장
@@ -117,7 +117,7 @@ class PlaylistSearchAPIView(APIView):
         playlist_in_db = Playlist.objects.filter(name__icontains=search)
         if playlist_in_db.exists():
             serializer = PlaylistSerializer(playlist_in_db, many=True)
-            cache.set(cache_key, serializer.data, timeout=1*60)    # 캐시 시간 30분
+            cache.set(cache_key, serializer.data, timeout=1*60)    
             return Response(serializer.data, status=200)
 
         # 캐시와 DB에 없으면 Spotify API 호출
@@ -148,17 +148,16 @@ class PlaylistSearchAPIView(APIView):
             }
 
             # 로컬 DB에 저장
-            Playlist.objects.get_or_create(
-                user=request.user,
-                playlist_id=playlist_data['id'],
-                defaults={
-                    "name": playlist_data['name'],
-                    "link": playlist_data['link'],
-                    "image_url": playlist_data['image_url']
-                }
-            )
-
-            # 리스트에 플레이리스트 추가
+            if request.user.is_authenticated:
+                Playlist.objects.get_or_create(
+                    user=request.user,
+                    playlist_id=playlist_data['id'],
+                    defaults={
+                        "name": playlist_data['name'],
+                        "link": playlist_data['link'],
+                        "image_url": playlist_data['image_url']
+                    }
+                )
             playlists.append(playlist_data)
 
         # 캐시에 저장
@@ -168,6 +167,7 @@ class PlaylistSearchAPIView(APIView):
 
 # Spotify API 데이터 변경 시 DB, 캐시 업데이트
 class PlaylistUpdateAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         search = request.query_params.get('query', None)
 
