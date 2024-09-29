@@ -1,0 +1,155 @@
+@font-face {
+    font-family: 'SCoreDream-500';
+    font-weight: 500; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream5.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-600';
+    font-weight: 600; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream6.woff2) format('woff2'),
+}
+
+
+@font-face {
+    font-family: 'SCoreDream-300';
+    font-weight: 300; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-400';
+    font-weight: 400; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream4.woff2) format('woff2'),
+}
+
+/* navbar 밑에 있는 body 전체 정렬 */
+.containor{
+    display: flex;
+    justify-content: center;
+}
+
+/* p태그에 기본적으로 잡혀있는 거 0으로! */
+p{
+    margin: 0;
+}
+
+/* post list 전체 위치 조절 */
+.post-list{
+    width: 75%;
+    margin-top: 50px;
+    color: #fff;
+}
+
+/* 제목이랑 검색창 정렬 */
+.title-search{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+/* 제목 스타일 Whatever Song */
+.title-search p{
+    font-family: 'SCoreDream-600';
+    font-size: 50px;
+    font-family: 'SCoreDream-400';
+    color: #fff;
+}
+
+/* 검색창 스타일 */
+.title-search input{
+    border:1px solid #fff;
+    background-color:transparent;
+    border-radius: 5px;
+    font-family: 'SCoreDream-400';
+    font-size: 15px;
+    color: #fff;
+    /* margin: 0 10px; */
+    /* padding: 0; */
+    width: 20%;
+    height: 30px;    
+}
+
+/* placeholder 스타일 조절 */
+input::placeholder {
+    font-family: 'SCoreDream-300';
+    font-size: 13px;
+    opacity: 0.5;
+    padding: 5px;
+    color: #fff;
+}
+
+/* 카테고리, 작성하기 정렬 및 스타일 */
+.category-create{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'SCoreDream-500';
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.category{
+    display: flex;
+}
+
+/* 카테고리 간격 띄우기 */
+select{
+    font-family: 'SCoreDream-500';
+    font-size: 15px;
+    text-align: center;
+    margin: 0 5px;
+    padding: 7px 5px;
+    background-color: rgba(255, 255, 255, 0);
+    color: #fff;
+    border-color: #fff;
+    border-width: 1px;
+    border-radius: 5px;
+    width: 50%
+}
+
+/* 한 개의 포스트 정렬 */
+.list a{
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+/* 이미지 간격, 크기 조절 */
+img{
+    margin-right: 15px;
+    width: 15%;
+}
+
+/* 게시글 제목 스타일 */
+#post-title{
+    font-family: 'SCoreDream-500';
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* 게시글 내용 스타일 */
+#post-content{
+    font-family: 'SCoreDream-300';
+    font-size: 18px;
+    margin-bottom: 20px;
+    width: 90%;
+}
+
+/* 작성자, 작성일, 좋아요 */
+.author-create-like{
+    display: flex;
+    font-family: 'SCoreDream-500';
+    font-size: 17px;
+    margin-top: 30px;
+}
+
+/* 작성자, 작성일, 좋아요 간격 조절 */
+.author-create-like p{
+    font-family: 'SCoreDream-400';
+    margin-right: 15px;
+}

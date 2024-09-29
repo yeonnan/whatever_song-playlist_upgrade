@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
+
+
+<div id="profile-container">
+    <div class="profile-image">
+        <img id="profile-picture" alt="Profile Picture">
+    </div>
+    <div class="profile-text">
+        <p id='text'>닉네임  <span id="nickname"></span></p>
+        <p id='text' class="hidden">아이디  <span id="username"></span></p>
+        <p id='text' class="hidden">이메일  <span id="email"></span></p>
+        <div class="profile-a">
+            <a href="#" id="edit-profile-button">프로필 수정</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="post-wrap">
+    <div class="menu-container">
+        <div class="menu">
+            <a href="#" id="posts-link">내 게시글 목록</a>
+            <a href="#" id="liked-posts-link">좋아요 누른 게시글 목록</a>
+            <a href="#" id="zzim-playlist-link">찜한 노래 목록</a>
+            <a href="#" id="coach-list-link">내가 받은 훈수</a>
+        </div>
+        
+        <div id="post-container" class="post-container"></div>
+        <div id="liked-post-container" class="liked-post-container"></div>
+        <div id="zzim-playlist-container" class="playlist-container"></div>
+        <div id="coach-container" class="coach-container"></div>    
+    </div>
+</div>
+
+
+<script src="{% static 'accounts/js/profile.js' %}"></script>
+
+
+{% endblock content %}

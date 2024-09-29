@@ -1,0 +1,193 @@
+@font-face {
+    font-family: 'SCoreDream-600';
+    font-weight: 600; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream6.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-500';
+    font-weight: 500; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream5.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-300';
+    font-weight: 300; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-400';
+    font-weight: 400; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream4.woff2) format('woff2'),
+}
+
+
+/* navbar 밑에 있는 body 전체 정렬 */
+.containor{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 작성폼 전체 박스 및 글자 조정 */
+.update-form{
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    background-color : rgba(0, 0, 0, 0.075);
+    border-radius: 10px;
+    /* 박스 그림자 설정x, y, blur, spread */
+    box-shadow: 6px 7px 15px 3px #00000025;
+}
+
+
+/* 박스 안에 있는 폼 정렬하기 */
+form{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    margin-top: 40px;
+}
+
+/* p태그에 기본적으로 잡혀있는 거 0으로! */
+p{
+    margin: 0;
+}
+
+/* p태그에 기본적으로 잡혀있는 거 0으로! */
+h1{
+    margin: 0;
+}
+
+.update-form h1 {
+    font-family: 'SCoreDream-600';
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    font-size: 40px;
+    margin-top: 40px;
+}
+
+
+/* 폼 안에 있는 글자들 정렬하기 */
+#all-text{
+    display: inline-block;
+    width: 110px;
+    height: 20px;
+}
+
+
+/* 글자, input값 한 줄씩 박스 만들어서 정렬 */
+.post{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'SCoreDream-500';
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+
+/* input칸 조절 */
+input { 
+    font-family: 'SCoreDream-400';
+    color: #fff;
+    border:1px solid #fff;
+    background-color:transparent;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 0 10px;
+    padding: 10px;
+    width: 70%;
+}
+
+
+/* 내용 칸 스타일 */
+textarea {
+    color: #fff; 
+    border:1px solid #fff;
+    background-color:transparent;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 0 10px;
+    padding: 10px;
+    width: 70%;
+    height: 250px;
+}
+
+
+
+
+/*  input placeholder 스타일 */
+input::placeholder {
+    font-family: 'SCoreDream-300';
+    font-size: 16px;
+    opacity: 0.5;
+    padding: 5px;
+    color: #fff;
+}
+
+
+/*  textarea placeholder 스타일 */
+textarea::placeholder {
+    font-family: 'SCoreDream-300';
+    font-size: 16px;
+    opacity: 0.5;
+    padding: 5px;
+    color: #fff;
+}
+
+
+/* '선택된 파일 없음' input칸 스타일(파일 이름 보여질 자리)  */
+#file-name{
+    display: flex;
+    width: 316px;
+    justify-content: center;
+    font-family: 'SCoreDream-300';
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.584);
+    padding: 10px 103px;
+    margin-right: 8px;
+    border: 1px solid;
+    border-color: #fff;
+    border-radius: 5px;
+
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    vertical-align: middle; 
+}
+
+
+/* '파일선택'버튼 스타일 조절 */
+.file-choice-btn{
+    font-family: 'SCoreDream-300';
+    font-size: 16px;
+    padding: 10px 5px;
+    margin: 0 3px;
+    border: 1px solid;
+    border-color: #fff;
+    border-radius: 5px;
+}
+
+
+/* 등록 버튼 스타일 */
+form button {
+    font-family: 'SCoreDream-400';
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0);
+    color: #fff;
+    border-color: #fff;
+    border-width: 1px;
+    border-radius: 5px;
+    margin: 10px 0 50px 700px;
+    padding: 5px 10px;
+    width: 10%
+}

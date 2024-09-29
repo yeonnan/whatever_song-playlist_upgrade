@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'playlist/css/playlist.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="어떤 플리를 원하나요?">
+</div>
+
+<div class="playlist-container" id="playlist-container"></div>
+
+<!-- JavaScript 파일 로드 -->
+<script src="{% static 'playlist/js/playlist.js' %}"></script>
+{% endblock content %}

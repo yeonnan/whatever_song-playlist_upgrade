@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static "posts/css/update.css" %}">
+
+<div class="update-form">
+    <h1>수정하기</h1>
+    <form id="update-form">
+        <div class="post">
+            <span id="all-text">제목</span><input type="text" id="post-title" required><br>
+        </div>
+        <div class="post">
+            <span id="all-text">내용</span><textarea id="post-content" rows="4" cols="50" ></textarea><br>
+        </div>
+        <div class="post">
+            <span id="all-text">노래링크</span><input type="url" id="song-link"><br>
+        </div>
+        <div class="post">
+            <span id="all-text">사진</span>
+            <div style="display: flex; align-items: center;">
+                <span id="file-name">선택된 파일 없음</span>
+                <label for="file-input" class="file-choice-btn">파일 선택</label>
+            </div>
+            <input type="file" id="file-input" style="display:none;"><br>
+        </div>
+        <button type="submit">수정</button>
+        
+    </form>
+</div>
+
+
+<script src="{% static 'posts/js/update.js' %}"></script>
+
+{% endblock content %}

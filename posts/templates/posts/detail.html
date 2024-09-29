@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static "posts/css/detail.css" %}">
+<div class="post">
+    <h1 id="post-title"></h1>
+    <div class="author-create">
+        <p id="post-created"></p>
+        <p id="post-updated"></p>
+        <a id="post-author" href="#"></a>
+    </div>
+    <div class="update-delete">
+        <a href="#" id="update" class="update-link">수정하기</a>
+        <button type="button" id="delete-button">삭제하기</button>
+    </div>
+    <div class="post-img">
+        <img id="post-img">
+    </div>
+    <p id="post-content"></p>
+    <div class="post-link">
+        <a id="post-link" href="#" target="_blank"></a>
+    </div>
+    <div class="count">
+        <p id='like-count'></p>        
+        <button id="unlike">
+            <div class="post-like2">😍</div>
+        </button>
+        <button id="like" class="like">
+            <div class="post-like1">😞</div>
+        </button>
+        <p id='comment-count'></p>
+        <p id="post-comment"></p>
+    </div>
+    <form id="comment-form">
+        <textarea id="comment-content" rows="4" cols="50" placeholder="댓글을 작성해주세요"></textarea><br>
+        <button type="submit">완료</button>
+    </form>
+    
+    <div class="comment-list">
+        <div class="comment" id="comment">
+            <div class="comment-button">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static 'posts/js/detail.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static "posts/css/list.css" %}">
+
+<div class="post-list">
+    <div class="title-search">
+        <p>Whatever Song Community</p>
+        <input type="text" id="searchInput" placeholder="검색어를 입력해주세요">
+    </div>
+    <div class="category-create">
+        <div class="category">
+            <select id="categorySelect">
+                <option value="">All</option>
+                <option value="노래 추천">노래 추천</option>
+                <option value="자유">자유</option>
+            </select>
+            <select id="sortSelect">
+                <option value="-created_at">최신순</option>
+                <option value="-like">좋아요순</option>
+            </select>        
+        </div>
+        <a href="/api/posts/create/">작성하기</a>
+    </div>
+    <div class="post">
+        <div class="content" id="postsList"></div>
+    </div>
+    <div id="paginationControls">
+        <button id="prevPage">Previous</button>
+        <span id="pageInfo"></span>
+        <button id="nextPage">Next</button>
+    </div>
+</div>
+<script src="{% static 'posts/js/list.js' %}"></script>
+{% endblock content %}

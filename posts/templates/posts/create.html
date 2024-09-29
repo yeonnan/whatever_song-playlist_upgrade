@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static "posts/css/create.css" %}">
+
+<div class="create-form">
+    <h1>작성하기</h1>
+    <form id="create-form">
+        <div class="post">
+            <span id="all-text">제목</span><input type="text" id="post-title" placeholder="제목를 입력해주세요" required><br>
+        </div>
+        <div class="post">
+            <span id="all-text">내용</span><textarea id="post-content" rows="4" cols="50" placeholder="내용을 입력해주세요" required></textarea><br>
+        </div>
+        <div class="post">
+            <span id="all-text">카테고리</span>
+            <select name="post-category" id="post-category" required>
+                <option value="">----</option>
+                <option value="노래 추천">노래 추천</option>
+                <option value="자유">자유</option>
+            </select>
+        </div>
+        <div class="post">
+            <span id="all-text">노래링크</span><input type="url" id="post-url" placeholder="노래 링크를 넣어주세요"><br>
+        </div>
+        <div class="post">
+            <span id="all-text">사진</span>
+            <div style="display: flex; align-items: center;">
+                <span id="file-name">선택된 파일 없음</span>
+                <label for="file-input" class="file-choice-btn">파일 선택</label>
+            </div>
+            <input type="file" id="file-input" style="display:none;"><br>
+        </div>
+        <button type="submit">등록</button>
+    </form>
+</div>
+<script src="{% static 'posts/js/create.js' %}"></script>
+
+{% endblock content %}
