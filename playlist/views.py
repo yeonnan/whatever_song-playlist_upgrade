@@ -98,6 +98,7 @@ class PlaylistDataAPIView(APIView):
 
         # 캐시에 저장
         cache.set(cache_key, playlists, timeout=1*60)
+        print(f"캐시에 저장된 데이터: {cache_key} -> {playlists}")
         return Response(playlists, status=200)
 
 # playlist 검색
@@ -105,7 +106,7 @@ class PlaylistSearchAPIView(APIView):
     def get(self, request):
         search = request.query_params.get("query", None)
 
-        # 캐시에서 데이터 확인
+        # 캐시에서 데이터 확인 
         cache_key = f'playlist_search_{search}'     # 검색어마다 고유한 캐시 생성
         cache_playlist = cache.get(cache_key)
 
@@ -117,7 +118,8 @@ class PlaylistSearchAPIView(APIView):
         playlist_in_db = Playlist.objects.filter(name__icontains=search)
         if playlist_in_db.exists():
             serializer = PlaylistSerializer(playlist_in_db, many=True)
-            cache.set(cache_key, serializer.data, timeout=1*60)    
+            cache.set(cache_key, serializer.data, timeout=1*60)   
+            print(f"캐시에 저장된 데이터: {cache_key} -> {serializer.data}")
             return Response(serializer.data, status=200)
 
         # 캐시와 DB에 없으면 Spotify API 호출
@@ -162,6 +164,7 @@ class PlaylistSearchAPIView(APIView):
 
         # 캐시에 저장
         cache.set(cache_key, playlists, timeout=1*60)
+        print(f"캐시에 저장된 데이터: {cache_key} -> {playlists}")
         return Response(playlists, status=200)
 
 
