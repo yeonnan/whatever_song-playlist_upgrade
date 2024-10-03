@@ -57,6 +57,18 @@ class PlaylistDataAPIView(APIView):
         cache_data = cache.get(cache_key)
 
         if cache_data:
+            # 캐시 데이터가 있을 때 인증된 사용자일 경우 DB에 저장
+            if request.user.is_authenticated:
+                for item in cache_data:
+                    Playlist.objects.get_or_create(
+                        playlist_id=item['id'],
+                        defaults={
+                            "name": item['name'],
+                            "link": item['link'],
+                            "image_url": item['image_url'],
+                            "user": request.user    # 인증된 사용자만 저장
+                        }
+                    )
             return Response(cache_data, status=200)
 
         access_token = get_access_token()
@@ -86,19 +98,19 @@ class PlaylistDataAPIView(APIView):
             # DB에 플레이리스트 데이터 저장
             if request.user.is_authenticated:
                 Playlist.objects.get_or_create(
-                    user=request.user,
+                    user = request.user,
                     playlist_id=playlist_data['id'],
                     defaults={
                         "name": playlist_data['name'],
                         "link": playlist_data['link'],
-                        "image_url": playlist_data['image_url']
+                        "image_url": playlist_data['image_url'],
                     }
                 )
             playlists.append(playlist_data)
 
         # 캐시에 저장
         cache.set(cache_key, playlists, timeout=1*60)
-        print(f"캐시에 저장된 데이터: {cache_key} -> {playlists}")
+        # print(f"캐시에 저장된 데이터: {cache_key} -> {playlists}")
         return Response(playlists, status=200)
 
 # playlist 검색
@@ -111,6 +123,17 @@ class PlaylistSearchAPIView(APIView):
         cache_playlist = cache.get(cache_key)
 
         if cache_playlist:
+            # 캐시 데이터가 있을 때도 DB에 저장
+            for item in cache_playlist:
+                Playlist.objects.get_or_create(
+                    playlist_id=item['id'],
+                    defaults={
+                        "name": item['name'],
+                        "link": item['link'],
+                        "image_url": item['image_url'],
+                        # "user": request.user if request.user.is_authenticated else None  # 사용자 정보 없이 저장
+                    }
+                )
             return Response(cache_playlist, status=200)
         
         # 로컬 DB에서 동일한 검색어로 저장된 플레이리스트 확인
@@ -119,7 +142,7 @@ class PlaylistSearchAPIView(APIView):
         if playlist_in_db.exists():
             serializer = PlaylistSerializer(playlist_in_db, many=True)
             cache.set(cache_key, serializer.data, timeout=1*60)   
-            print(f"캐시에 저장된 데이터: {cache_key} -> {serializer.data}")
+            # print(f"캐시에 저장된 데이터: {cache_key} -> {serializer.data}")
             return Response(serializer.data, status=200)
 
         # 캐시와 DB에 없으면 Spotify API 호출
@@ -150,21 +173,19 @@ class PlaylistSearchAPIView(APIView):
             }
 
             # 로컬 DB에 저장
-            if request.user.is_authenticated:
-                Playlist.objects.get_or_create(
-                    user=request.user,
-                    playlist_id=playlist_data['id'],
-                    defaults={
-                        "name": playlist_data['name'],
-                        "link": playlist_data['link'],
-                        "image_url": playlist_data['image_url']
-                    }
-                )
+            Playlist.objects.get_or_create(
+                playlist_id=playlist_data['id'],
+                defaults={
+                    "name": playlist_data['name'],
+                    "link": playlist_data['link'],
+                    "image_url": playlist_data['image_url']
+                }
+            )
             playlists.append(playlist_data)
 
         # 캐시에 저장
         cache.set(cache_key, playlists, timeout=1*60)
-        print(f"캐시에 저장된 데이터: {cache_key} -> {playlists}")
+        # print(f"캐시에 저장된 데이터: {cache_key} -> {playlists}")
         return Response(playlists, status=200)
 
 

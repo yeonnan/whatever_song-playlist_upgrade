@@ -3,7 +3,7 @@ from django.conf import settings
     
 
 class Playlist(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     playlist_id = models.CharField(max_length=255)
     name = models.CharField(max_length=255)  
     link = models.URLField()

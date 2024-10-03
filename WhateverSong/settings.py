@@ -92,6 +92,7 @@ DATABASES = {
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': os.getenv('POSTGRES_HOST'),
+        # 'HOST': 'localhost', # 로컬에서 작업 중일 때 사용
         'PORT': os.getenv('POSTGRES_PORT', 5432),
         'ATOMIC_REQUESTS': True,
     }
