@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'SCoreDream-400';
+    font-weight: 400; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream4.woff2) format('woff2');
+    font-display: swap;
+}
+
+body {
+    background-image: linear-gradient(to right, #4861da, #8f64c6, #d859aa);
+    background-size: cover;
+}
+
+.form-container {
+    max-width: 600px;
+    font-family: 'SCoreDream-400';
+    margin: 50px auto;
+    padding: 40px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: rgb(255, 255, 255);
+}
+
+.profile-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'SCoreDream-400';
+    align-items: center;
+    margin-bottom: 10px;
+    text-align: center; /* 이미지를 가운데로 정렬합니다. */
+}
+
+.image-label {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #b9b9b9;
+    font-family: 'SCoreDream-400';
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-label input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    font-family: 'SCoreDream-400';
+    opacity: 0;
+    cursor: pointer;
+}
+
+.image-label img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#change-password-form {
+    font-size: 13px;
+}
+
+label {
+    display: inline-block;
+    width: 80px; /* 이름(label)의 너비 조절 */
+    margin-bottom: 15px;
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 80%; /* 입력창의 너비를 조절하여 이름과 입력창이 한 줄에 표시되도록 함 */
+    /* (100% - 30%) - 2% = 68% */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #b9b9b9;
+    font-family: 'SCoreDream-400';
+    background-color: rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* 입력 요소에 내용과 패딩을 포함하도록 함 */
+    border-radius: 5px;
+    height: 50px;
+    color: #ffffff;
+    outline: rgb(182, 182, 182);
+}
+
+button {
+    padding: 12px;
+    background-color: rgb(255,255,255,0.1);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+#change-password-form button {
+    display: block;
+    margin: 0 auto;
+}
+
+#update-profile-form button{
+    display: block;
+    margin: 0 auto;
+}
+
+#change-password-form {
+    margin-top: 10px; /* 비밀번호 입력창 위 여백 추가 */
+}

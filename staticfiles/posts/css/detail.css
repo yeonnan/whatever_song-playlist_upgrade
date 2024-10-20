@@ -1,0 +1,273 @@
+@font-face {
+    font-family: 'SCoreDream-500';
+    font-weight: 500; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream5.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-600';
+    font-weight: 600; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream6.woff2) format('woff2'),
+}
+
+
+@font-face {
+    font-family: 'SCoreDream-300';
+    font-weight: 300; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-400';
+    font-weight: 400; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream4.woff2) format('woff2'),
+}
+
+
+/* navbar 밑에 있는 body 전체 정렬 */
+.containor{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 박스전체 조절 */
+.post{
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 65%;
+    height: 100%;
+    background-color : rgba(0, 0, 0, 0.075);
+    border-radius: 10px;
+    /* 박스 그림자 설정x, y, blur, spread */
+    box-shadow: 6px 7px 15px 3px #00000025;
+}
+
+
+/* p태그에 기본적으로 잡혀있는 거 0으로! */
+p{
+    margin: 0;
+}
+
+.post-link{
+    /* background-color: #ffffff24; */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 88%;
+    height: 40px;
+    margin: 20px 50px 60px 50px;
+    border: solid 1px #fff;
+    border-radius: 10px;
+}
+
+/* 게시글 제목 조정 */
+#post-title{
+    display: flex;
+    justify-content: center;
+    font-family: 'SCoreDream-500';
+    font-size: 40px;
+    margin: 50px 0;
+}
+
+
+/* 작성일, 작성자 조정 */
+.author-create{
+    font-family: 'SCoreDream-500';
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 30px;
+}
+
+
+.update-delete{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* 수정하기 링크 조정 */
+.update-link{
+    font-family: 'SCoreDream-500';
+    font-size: 15px;
+    margin-top: 10px;
+    margin-right: 30px;
+}
+
+#delete-button{
+    font-family: 'SCoreDream-500';
+    font-size: 15px;
+    background-color: transparent;
+    color: #fff;
+    border-color: #ffffff00;
+    margin-top: 5px;
+    margin-right: 22px;
+}
+
+/* 게시글 이미지 위치 조정 */
+.post-img{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 게시글 이미지 크기 조정 */
+.post-img img{
+    width: 50%;
+}
+
+
+/* 게시글 내용 조정 */
+#post-content{
+    font-family: 'SCoreDream-400';
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    margin: 30px 50px;
+}
+
+
+/* 댓글 수, 좋아요 수 글자 조정 및 폰트 조정 */
+.count{
+    font-family: 'SCoreDream-400';
+    font-size: 22px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 50px 10px 50px;
+    position: relative;
+}
+
+#comment-count{
+    font-size: 22px;
+    margin-left: 20px;
+}
+
+#like-count{
+    font-family: 'SCoreDream-400';
+    margin-left: 35px;
+}
+
+#unlike{
+    font-family: 'SCoreDream-400';
+    font-size: 25px;
+    background-color: rgba(255, 255, 255, 0);
+    border-color: #ffffff00;
+    color: #fff;
+    margin: 0;
+    padding: 2px;
+    position: absolute;
+}
+
+#like{
+    font-family: 'SCoreDream-400';
+    font-size: 25px;
+    background-color: rgba(255, 255, 255, 0);
+    border-color: #ffffff00;
+    color: #fff;
+    margin: 0;
+    padding: 2px;
+    position: absolute;
+}
+
+/* 댓글 칸, 버튼 위치 조정 */
+#comment-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 댓글 칸 스타일 */
+textarea { 
+    font-family: 'SCoreDream-400';
+    color: #fff;
+    border:1px solid #fff;
+    background-color:transparent;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-right: 10px;
+    padding: 10px;
+    width: 77%;
+    height: 20px;
+}
+
+
+/* placeholder 조절 */
+textarea::placeholder {
+    font-family: 'SCoreDream-300';
+    font-size: 16px;
+    opacity: 0.5;
+    padding: 4px;
+    color: #fff;
+}
+
+
+
+/* 완료 버튼 스타일 */
+#comment-form button {
+    font-family: 'SCoreDream-400';
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0);
+    color: #fff;
+    border-color: #fff;
+    border-width: 1px;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 11px 20px;
+}
+
+
+
+/* 댓글 하나 전체(닉네임, 프사, 내용, 버튼 등) */
+.comment-wrap{
+    display: flex;
+    width: 100%;
+    margin-left: 35px;
+    margin-top: 20px;
+}
+
+/* 댓글 프사 */
+.comment-wrap img{
+    width: 100%;
+    border-radius: 70%;
+}
+
+
+.comment-wrap a{
+    width: 12%;
+}
+
+.author-update-delete{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-auhtor{
+    font-family: 'SCoreDream-500';
+}
+
+.comment-content{
+    width: 77%;
+    margin: 10px 0;
+}
+
+/* 댓글 안에 있는 버튼 스타일 */
+.comment-wrap button{
+    font-family: 'SCoreDream-400';
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0);
+    color: #fff;
+    border-color: #ffffff00;
+    margin: 0;
+    padding: 2px;
+}

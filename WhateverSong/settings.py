@@ -103,6 +103,13 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
@@ -154,8 +161,17 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+
+# asgi를 이용해 사이트 제공 시 django에서 제공하는 static 사용 불가
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # 앱 내의 static 폴더 경로
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # collectstatic 명령어로 모은 파일들이 저장되는 경로
+
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

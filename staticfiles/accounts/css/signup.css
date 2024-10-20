@@ -1,0 +1,176 @@
+@font-face {
+    font-family: 'SCoreDream-600';
+    font-weight: 600; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream6.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-500';
+    font-weight: 500; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream5.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-300';
+    font-weight: 300; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff2) format('woff2'),
+}
+
+@font-face {
+    font-family: 'SCoreDream-400';
+    font-weight: 400; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream4.woff2) format('woff2'),
+}
+
+
+/* navbar 밑에 있는 body 전체 정렬 */
+.containor{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 회원가입 전체 박스 및 글자 조정 */
+.signup-form{
+    font-family: 'SCoreDream-400';
+    font-size: 22px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 100%;
+    background-color : rgba(0, 0, 0, 0.075);
+    border-radius: 10px;
+    
+    /* 박스 그림자 설정x, y, blur, spread */
+    box-shadow: 6px 7px 15px 3px #00000025;
+}
+
+/* 'Signup' 글자 조정 */
+.signup-form p {
+    font-family: 'SCoreDream-600';
+    color: #fff;
+    font-size: 40px;
+    margin-bottom: 100px;
+}
+
+
+/* 박스 안에 있는 회원가입 폼 정렬하기 */
+#signup-form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width:100%;
+}
+
+/* 글자 및 칸 위치조절 */
+.signup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+
+/* 칸 제외한 글자들만 위치 조절 및 폰트 설정 */
+.signup-text{
+    font-family: 'SCoreDream-500';
+    display: inline-block;
+    width: 110px;
+    height: 20px;
+}
+
+
+/* input칸 조절 */
+input { 
+    font-family: 'SCoreDream-400';
+    color: #fff;
+    border:1px solid #fff;
+    background-color:transparent;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 0 10px;
+    padding: 10px;
+    width: 60%;
+}
+
+
+
+/* placeholder 조절 */
+input::placeholder {
+    font-family: 'SCoreDream-300';
+    font-size: 16px;
+    opacity: 0.5;
+    padding: 5px;
+    color: #fff;
+}
+
+
+/* 사진 글자, input칸, 버튼 라인 위치 조절 */
+.signup-image-line{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* '선택된 파일 없음' input칸 조절(파일 이름 보여질 자리)  */
+#file-name{
+    display: inline-block;
+    width: 120px;
+    justify-content: center;
+    font-family: 'SCoreDream-300';
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.584);
+    padding: 10px 87px;
+    margin-right: 8px;
+    border: 1px solid;
+    border-color: #fff;
+    border-radius: 5px;
+
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    vertical-align: middle; 
+}
+
+/* '파일선택'버튼 스타일 조절 */
+.file-choice-btn{
+    font-family: 'SCoreDream-300';
+    font-size: 16px;
+    padding: 10px 5px;
+    margin: 0 3px;
+    border: 1px solid;
+    border-color: #fff;
+    border-radius: 5px;
+}
+
+/* signup 버튼 위치 조절 */
+.signup-btn-line{
+    display: flex;
+    justify-content: center;
+    margin-left: 420px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+/* signup 버튼 스타일 조절 */
+#signup-form button {
+    font-family: 'SCoreDream-400';
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0);
+    color: #fff;
+    border-color: #fff;
+    border-width: 1px;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 5px 10px;
+}
+
+

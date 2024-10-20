@@ -29,5 +29,5 @@ COPY . .
 EXPOSE 8000
 
 # 서버 실행
-# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-CMD ["daphne", "WhateverSong.asgi:application"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["daphne", "WhateverSong.asgi:application"]
