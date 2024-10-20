@@ -36,6 +36,10 @@ ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS',"").split(',')
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'corsheaders',
+    'channels',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,9 +49,11 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'rest_framework',
+
     'accounts',
     'posts',
-    'playlist'
+    'playlist',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -172,4 +178,16 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
+}
+
+ASGI_APPLICATION = 'WhateverSong.asgi.application'
+
+# Channels
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [('redis', 6379)],
+        },
+    },
 }
