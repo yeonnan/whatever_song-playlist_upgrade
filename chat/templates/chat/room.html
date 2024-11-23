@@ -6,13 +6,14 @@
 {% endblock head %}
 
 {% block content %}
-<textarea id="chat-log" cols="100" rows="20"></textarea><br>
-<input id="chat-message-input" type="text" size="100"><br>
+<div id="chat-log" style="width: 90%; height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background-color: white;"></div>
+<br>
+<input id="chat-message-input" type="text" style="width: 90%;"><br>
 <input id="chat-message-submit" type="button" value="Send">
 {{ room_name|json_script:"room-name" }}
 <script>
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
+    const userNickname = localStorage.getItem('user_nickname');
     const chatSocket = new WebSocket(
         'ws://'
         + window.location.host
@@ -23,7 +24,24 @@
 
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
-        document.querySelector('#chat-log').value += (data.message + '\n');
+        const chatLog = document.querySelector('#chat-log');
+    
+        const messageDiv = document.createElement('div');
+        messageDiv.style.marginBottom = '10px';
+    
+        if (data.user == userNickname) {
+            // 본인의 메시지: 오른쪽 정렬
+            messageDiv.style.textAlign = 'right';
+            messageDiv.innerHTML = `${data.message}`;
+        } else {
+            // 다른 사용자의 메시지: 왼쪽 정렬
+            messageDiv.style.textAlign = 'left';
+            messageDiv.innerHTML = `<strong>${data.user}:</strong> ${data.message}`;
+        }
+    
+        chatLog.appendChild(messageDiv);
+    
+        chatLog.scrollTop = chatLog.scrollHeight;
     };
 
     chatSocket.onclose = function(e) {
@@ -41,6 +59,7 @@
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
         chatSocket.send(JSON.stringify({
+            'user' : userNickname,
             'message': message
         }));
         messageInputDom.value = '';
